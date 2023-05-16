@@ -1,9 +1,16 @@
 import ky from "ky";
+
 import {
   decodeUserFromTokenCookie,
   getCurrentDateTime,
   getTokenCookie,
 } from "../utils";
+
+// export default {
+//   indexThoughts() {
+//     return ky.get("http://localhost:3001/thoughts").json();
+//   },
+// };
 
 const authAPI = ky.create({
   // Hooks allow modifications during the request lifecycle. Hook functions may be async and are run serially.
