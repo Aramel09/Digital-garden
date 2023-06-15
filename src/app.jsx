@@ -8,6 +8,7 @@ import Error from "./components/error";
 import Layout from "./components/layout";
 import { About, Contact, Home, LoginRegister } from "./pages";
 import { loadThoughts } from "./pages/loaders";
+import { registerOrLogin } from "./pages/actions";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,7 +17,11 @@ const router = createBrowserRouter(
       <Route path="thoughts/:author" element={<Home />} loader={loadThoughts} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/login" element={<LoginRegister />} />
+      <Route
+        path="/login"
+        element={<LoginRegister />}
+        action={registerOrLogin}
+      />
       <Route path="*" element={<Error />} />
     </Route>
   )

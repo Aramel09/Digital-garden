@@ -1,17 +1,28 @@
+import { useEffect, useState } from "react";
+import { Form, useActionData } from "react-router-dom";
 import { TextInput } from "../components/form";
 import useRegistering from "../hooks/useRegistering";
 
 export default function LoginRegister() {
+  const errorMessage = useActionData();
   const [isRegistering, setIsRegistering] = useRegistering();
 
+  const [isErrorShown, setIsErrorShown] = useState(false);
+
+  useEffect(() => {
+    setIsErrorShown(true);
+  }, [errorMessage]);
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        console.log("submitted!");
+    <Form
+      method="post"
+      onChange={() => {
+        setIsErrorShown(false);
       }}
     >
       <h2>{isRegistering ? "Register" : "Login"}</h2>
+
+      {errorMessage && isErrorShown && <p className="error">{errorMessage}</p>}
 
       <TextInput id="username" />
       <TextInput type="password" id="password" />
@@ -35,6 +46,6 @@ export default function LoginRegister() {
       >
         {isRegistering ? "Already have an account?" : "Don't have an account?"}
       </button>
-    </form>
+    </Form>
   );
 }
