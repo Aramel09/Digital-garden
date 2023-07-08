@@ -1,18 +1,14 @@
-import { Suspense, useEffect } from "react";
-import { Await, Form, useLoaderData, useOutletContext } from "react-router-dom";
+import { Suspense } from "react";
+import { Await, Form, useLoaderData } from "react-router-dom";
 import Error from "../components/error";
 import { TextInput } from "../components/form";
 import Loading from "../components/loading";
 import ThoughtList from "../components/thoughts/thought-list";
-import { decodeUserFromTokenCookie } from "../services/utils";
+import useSetCurrentUSer from "../hooks/useSetCurrentUser";
 
 export default function Home() {
   const { thoughts } = useLoaderData();
-  const [currentUser, setCurrentUser] = useOutletContext();
-
-  useEffect(() => {
-    setCurrentUser(decodeUserFromTokenCookie);
-  });
+  const currentUser = useSetCurrentUSer();
 
   return (
     <>
