@@ -20,7 +20,9 @@ export default function Home() {
         <Form method="post">
           <h1>{currentUser}</h1>
           <TextInput id="thought" />
-          <button className="btn">Submit</button>
+          <button type="submit" className="btn">
+            Submit
+          </button>
         </Form>
       )}
       <Suspense fallback={<Loading />}>
