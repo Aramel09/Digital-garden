@@ -15,7 +15,10 @@ export default function Home() {
       {currentUser && (
         <Form method="post">
           <h1>{currentUser}</h1>
-          <TextInput id="thought" />
+          <TextInput
+            id="thought"
+            placeholder={"What are you thinking?" + currentUser}
+          />
           <button type="submit" className="btn">
             Submit
           </button>
