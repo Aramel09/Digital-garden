@@ -1,6 +1,10 @@
 import { redirect } from "react-router-dom";
 import api from "../services/api";
-import { setTokenCookie, validateRegistrationPasswords } from "../utils";
+import {
+  decodeUserFromTokenCookie,
+  setTokenCookie,
+  validateRegistrationPasswords,
+} from "../utils";
 
 export const registerOrLogin = async ({ request }) => {
   const fd = await request.formData();
@@ -26,12 +30,22 @@ export const registerOrLogin = async ({ request }) => {
   }
 };
 
-export const addThought = async ({ request }) => {
+export const mutateThought = async ({ request }) => {
   const fd = await request.formData();
 
-  const thoughtInformation = Object.fromEntries(fd);
+  switch (request.method) {
+    case "POST": {
+      const thoughtInformation = Object.fromEntries(fd);
 
-  await api.createThought(thoughtInformation);
-
+      await api.createThought(thoughtInformation);
+      break;
+    }
+    case "DELETE": {
+      await api.deleteThought(
+        Object.fromEntries(fd),
+        decodeUserFromTokenCookie()
+      );
+    }
+  }
   return redirect("/");
 };

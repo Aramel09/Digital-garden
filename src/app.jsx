@@ -7,7 +7,7 @@ import {
 import Error from "./components/error";
 import Layout from "./components/layout";
 import { About, Contact, Home, LoginRegister } from "./pages";
-import { addThought, registerOrLogin } from "./pages/actions";
+import { mutateThought, registerOrLogin } from "./pages/actions";
 import { loadThoughts } from "./pages/loaders";
 
 const router = createBrowserRouter(
@@ -17,7 +17,7 @@ const router = createBrowserRouter(
         path="/"
         element={<Home />}
         loader={loadThoughts}
-        action={addThought}
+        action={mutateThought}
       />
       <Route path="thoughts/:author" element={<Home />} loader={loadThoughts} />
       <Route path="/about" element={<About />} />
