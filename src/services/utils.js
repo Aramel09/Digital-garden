@@ -16,6 +16,23 @@ export const delCookieToken = () => {
     "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax";
 };
 
+export const getCurrentDateTime = () => {
+  const now = new Date();
+
+  return {
+    date: now.toLocaleDateString("en-US", {
+      month: "2-digit",
+      day: "2-digit",
+      year: "numeric",
+    }),
+    time: now.toLocaleTimeString("en-US", {
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+  };
+};
+
 export const getTokenCookie = () => {
   return (
     document.cookie
