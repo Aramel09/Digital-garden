@@ -27,7 +27,7 @@ export default function Home() {
             placeholder={"What are you thinking?" + currentUser}
           />
           {error && isShowingError && <p className="error">{error}</p>}
-          <button type="submit" className="btn">
+          <button type="submit" className="btn" disabled={!isIdle}>
             Submit
           </button>
         </Form>
