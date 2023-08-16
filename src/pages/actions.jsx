@@ -31,21 +31,23 @@ export const registerOrLogin = async ({ request }) => {
 };
 
 export const mutateThought = async ({ request }) => {
+  const author = decodeUserFromTokenCookie();
   const fd = await request.formData();
 
-  switch (request.method) {
-    case "POST": {
-      const thoughtInformation = Object.fromEntries(fd);
+  try {
+    switch (request.method) {
+      case "POST": {
+        const thought = fd.get("thought");
 
-      await api.createThought(thoughtInformation);
-      break;
+        await api.addThought({ thought, author });
+        return null;
+      }
+      case "DELETE": {
+        await api.deleteThought(Object.fromEntries(fd), author);
+        return null;
+      }
     }
-    case "DELETE": {
-      await api.deleteThought(
-        Object.fromEntries(fd),
-        decodeUserFromTokenCookie()
-      );
-    }
+  } catch (error) {
+    return error.message;
   }
-  return redirect("/");
 };
