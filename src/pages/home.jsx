@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { Await, Form, useLoaderData, useNavigation } from "react-router-dom";
 import Error from "../components/error";
 import { TextInput } from "../components/form";
@@ -9,6 +9,7 @@ import useError from "../hooks/useErrorShown";
 import useSetCurrentUSer from "../hooks/useSetCurrentUser";
 
 export default function Home() {
+  const [editThought, setEditThought] = useState(null);
   const { thoughts } = useLoaderData();
   const navigation = useNavigation();
   const currentUser = useSetCurrentUSer();
@@ -34,7 +35,7 @@ export default function Home() {
       )}
       <Suspense fallback={<Loading />}>
         <Await resolve={thoughts} errorElement={<Error />}>
-          <ThoughtList />
+          <ThoughtList setEditThought={setEditThought} />
         </Await>
       </Suspense>
     </>

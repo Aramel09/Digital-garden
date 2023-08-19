@@ -5,7 +5,7 @@ import {
   useSubmit,
 } from "react-router-dom";
 
-export default function Thought({ thought }) {
+export default function Thought({ thought, setEditThought }) {
   const [currentUser] = useOutletContext();
   const submit = useSubmit();
   const navigation = useNavigation();
@@ -20,7 +20,14 @@ export default function Thought({ thought }) {
 
         {currentUser === thought.author && (
           <div className="my-2 space-x-2">
-            <button className="rounded bg-yellow-500 px-4 py-2">Edit</button>
+            <button
+              className="rounded bg-yellow-500 px-4 py-2"
+              onClick={() => {
+                setEditThought(thought);
+              }}
+            >
+              Edit
+            </button>
             <button
               disabled={!isIdle}
               className="rounded bg-red-500 px-4 py-2"
