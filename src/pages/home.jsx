@@ -9,7 +9,9 @@ import useError from "../hooks/useErrorShown";
 import useSetCurrentUSer from "../hooks/useSetCurrentUser";
 
 export default function Home() {
-  const [editThought, setEditThought] = useState(null);
+  const [thought2Edit, setThought2Edit] = useState(null);
+  const { thought } = thought2Edit || {};
+
   const { thoughts } = useLoaderData();
   const navigation = useNavigation();
   const currentUser = useSetCurrentUSer();
@@ -18,6 +20,9 @@ export default function Home() {
   const isIdle = navigation.state === "idle";
 
   const formRef = useClearForm(error, isIdle);
+
+  console.log(thought2Edit);
+  console.log(thought);
   return (
     <>
       {currentUser && (
@@ -26,6 +31,7 @@ export default function Home() {
           <TextInput
             id="thought"
             placeholder={"What are you thinking?" + currentUser}
+            defaultValue={thought}
           />
           {error && isShowingError && <p className="error">{error}</p>}
           <button type="submit" className="btn" disabled={!isIdle}>
@@ -35,7 +41,7 @@ export default function Home() {
       )}
       <Suspense fallback={<Loading />}>
         <Await resolve={thoughts} errorElement={<Error />}>
-          <ThoughtList setEditThought={setEditThought} />
+          <ThoughtList setThought2Edit={setThought2Edit} />
         </Await>
       </Suspense>
     </>

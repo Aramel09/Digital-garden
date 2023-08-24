@@ -7,6 +7,7 @@ export default function TextInput({
   id,
   label,
   placeholder,
+  defaultValue,
   required = true,
   type = "text",
 }) {
@@ -21,6 +22,7 @@ export default function TextInput({
         name={camelCase(id)}
         placeholder={placeholder || label || startCase(id)}
         required={required}
+        defaultValue={defaultValue}
       />
     </div>
   );

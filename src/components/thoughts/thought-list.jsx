@@ -1,7 +1,7 @@
 import { useAsyncValue } from "react-router-dom";
 import Thought from "./thought";
 
-export default function Thoughts({ setEditThought }) {
+export default function Thoughts({ setThought2Edit }) {
   const items = useAsyncValue();
 
   return (
@@ -10,7 +10,7 @@ export default function Thoughts({ setEditThought }) {
         <Thought
           key={thought.id}
           thought={thought}
-          setEditThought={setEditThought}
+          setThought2Edit={setThought2Edit}
         />
       ))}
     </ol>
