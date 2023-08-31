@@ -42,6 +42,17 @@ export const mutateThought = async ({ request }) => {
         await api.addThought({ thought, author });
         return null;
       }
+      case "PUT": {
+        const id = fd.get("id");
+        const thought = fd.get("thought");
+
+        // We include the string "edited" so that it will display like that in the UI
+        await api.updateThought(
+          { thought: thought + " (edited)", id, author },
+          author
+        );
+        return null;
+      }
       case "DELETE": {
         await api.deleteThought(Object.fromEntries(fd), author);
         return null;
